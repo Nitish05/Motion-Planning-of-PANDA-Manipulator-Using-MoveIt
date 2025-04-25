@@ -1,82 +1,88 @@
-# Motion-Planning-of-PANDA-Manipulator-Using-MoveIt
+# Motion Planning of PANDA Manipulator Using MoveIt (ROS2)
 
-This repository contains two ROS 2 packages that work together to simulate and control a Panda robot. The packages are:
+This repository contains two ROS 2 packages that collaboratively simulate and control a Panda robotic manipulator. The packages included are:
 
-- **project4_panda** – Contains the robot configurations (URDF, MoveIt configurations, etc.) and named gripper positions.
-- **package_120169595** – Contains the `move_robot` script that plans and executes a pick-and-place operation for the Panda robot.
+- **project4_panda**: Includes robot configurations such as URDF files, MoveIt setups, and predefined gripper positions.
+- **package_120385506**: Contains a TypeScript version of the `move_robot` script that executes pick-and-place operations for the Panda manipulator.
 
 ---
 
 ## Prerequisites
 
-- Make sure have the **Ubuntu-22.04.5 (Jammy Jellyfish)** LTS installed 
-- This Project used **ROS2 Humble Hawksbill** so make sure to install that too.
-   Link for ROS2 Humble Documentation - https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html
-- If ROS2 Humble is not working, Try to use ROS2 Galactic and Ubuntu 20.04.
+- **Operating System**: Ubuntu 22.04.5 LTS (Jammy Jellyfish)
+- **ROS2 Version**: ROS2 Humble Hawksbill ([Installation Guide](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html))
+
+> If encountering issues with ROS2 Humble, consider using ROS2 Galactic with Ubuntu 20.04 instead.
 
 ---
 
-## Installation and Build
+## Installation and Setup
 
-### Create or locate your workspace
+### Create a ROS2 Workspace
 
-If you don’t have a workspace yet, create one:
-
+Create a workspace (if not already created):
 ```bash
 mkdir -p ~/my_ros2_ws/src
 cd ~/my_ros2_ws
 ```
 
-## Copy or clone the packages into the `src` folder of your workspace:
+### Clone the Packages
+
+Clone or copy the packages into the `src` directory of your workspace:
 ```bash
 my_ros2_ws/
 └── src/
     ├── project4_panda
-    └── package_120169595
+    └── package_120385506
 ```
 
-## Build Your Workspace:
+### Build Your Workspace
 ```bash
 colcon build
 source install/setup.bash
 ```
-## To run the simulation, run these lines in your workspace:
 
-## Terminal 1:
+---
+
+## Running the Simulation
+
+### Terminal 1
+Launch the robot simulation:
 ```bash
 ros2 launch project4_panda demo.launch.py
 ```
 
-## Terminal 2:
+### Terminal 2
+Run the robot control script:
 ```bash
 colcon build
 source install/setup.bash
-ros2 run package_120169595 move_robot
+ros2 run package_120385506 move_robot
 ```
 
-## Robot Operation
-When you run move_robot, the following sequence occurs:
+---
 
-- **Move to default position & open gripper:**
+## Robot Operation Sequence
 
-     The robot moves to a default position and ensures the gripper is open.
+Upon executing `move_robot`, the Panda robot performs the following tasks:
 
-- **Move to pickup pose & close gripper:**
+1. **Move to Default Pose & Open Gripper**
+   - Robot returns to a predefined default position.
+   - Ensures the gripper is open.
 
-     The robot moves to the pickup pose and closes the gripper, simulating grasping an object.
+2. **Pick-up Pose & Grasp**
+   - Moves to the object's pickup position.
+   - Closes the gripper to grasp the object.
 
-- **Move to place pose & open gripper:**
+3. **Place Pose & Release**
+   - Moves to the designated place location.
+   - Opens the gripper, releasing the object.
 
-     The robot moves to the place pose and opens the gripper, simulating placing the object.
+4. **Return to Default Pose**
+   - Robot moves back to the initial default position.
 
-- **Return to default position:**
-
-     Finally, the robot moves back to the default position.
+---
 
 ## Acknowledgements
 
-I would like to acknowledge the **University of Maryland (UMD)** for providing me the original **Project4 Panda** package.
-
-
-
-
+Special thanks to the **University of Maryland (UMD)** for providing the original **Project4 Panda** package.
